@@ -1,0 +1,96 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Browse a wide selection of food products available for export to North America, the UK, and the EU.">
+    <meta name="keywords" content="B2B, Nigerian food export, African food export, North America, UK, EU, wholesale food products.">
+    <meta name="author" content="Food Exporter">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>McCancy: Fresh AFrican Food Export Business</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <script src="{% static "js/slider.js" %}" defer></script>
+</head>
+<body class="bg-gray-100">
+    <nav class="bg-black p-2 fixed top-0 left-0 w-full z-50 shadow-md">
+        <div class="max-w-7xl mx-auto px-6 py-3">
+            <div class="flex items-center justify-between">
+                <div class="text-white text-lg semibold">
+                    <a href="/" class="hover:text-gray-200">McCancy Food Mart</a>
+                </div>
+                <!--Desktop Navigation links-->
+                <div class="hidden md:flex space-x-6">
+                    <a href="/#about" class="text-white hover:text-gray-200">About</a>
+                    <a href="/#services" class="text-white hover:text-gray-200">Services</a>
+                    <a href="/#products" class="block text-white hover:text-gray-200">Products</a>
+                    <a href="/#contact" class="text-white hover:text-gray-200">Contact</a>
+                </div>
+                <!--Mobile Menu Toggle-->
+                <div class="md:hidden">
+                    <button id="menu-btn" class="text-white">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden">
+            <div class="px-6 py-3 space-y-4 bg-blue-500">
+                <a href="/#about" class="block text-white hover:text-gray-200">About</a>
+                <a href="/#services" class="block text-white hover:text-gray-200">Services</a>
+                <a href="/#products" class="block text-white hover:text-gray-200">Products</a>
+                <a href="/#contact" class="block text-white hover:text-gray-200">Contact</a>
+            </div>
+        </div>
+    </nav>
+    {% block content %}
+
+    {%  endblock %}
+    <footer class="bg-black p-2 text-white text-center" id="contact">
+        <div class="max-w-7xl mx-auto px-6 py-3">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="space-y-4">
+                    <h3 class="text-lg font-semibold py-2 bg-yellow-500 hover:bg-green-500 rounded-lg">Contact Us For a Quote:</h3>
+                    <p class="hover:text-green-400 hover:underline">Email: <a href="mailto:{{owner_contact.email}}">{{owner_contact.email}}</a> </p>
+                    <p class="hover:text-green-400 hover:underline">Phone: <a href="tel:{{owner_contact.mobile_number}}">{{owner_contact.mobile_number}}</a></p>
+                    <p class="hover:text-green-400 hover:underline">WhatsApp: <a href="https://wa.me/{{owner_contact.whatsapp}}">{{owner_contact.whatsapp}}</a></p>
+                </div>
+                <div class="space-y-4">
+                    <h3 class="text-lg text-yellow-500 font-semibold">Quick Links</h3>
+                     <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-green-300 hover:underline">Privacy Policy </a></li>
+                        <li><a href="#" class="hover:text-green-300 hover:underline">Terms of Service </a></li>
+                        <li><a href="#" class="hover:text-green-300 hover:underline">FAQ</a></li>
+                     </ul>
+                </div>
+                <div class="space-y-4">
+                    <h3 class="text-lg text-yellow-500 font-semibold">Our Address</h3>
+                    <p class="block hover:text-green-300">123 Export Street...</p>
+                    <p class="block hover:text-green-300">Ibusa Road, Asaba</p>
+                    <p class="block hover:text-green-300">Delta State</p>
+                </div>
+                <div class="space-y-4">
+                    <h3 class="text-lg text-yellow-500 font-semibold">Follow Us</h3>
+                    <ul class="space-y-2">
+                    <li><a href="#" class="hover:text-green-300 hover:underline">Facebook </a></li>
+                    <li><a href="#" class="hover:text-green-300 hover:underline">Twitter </a></li>
+                    <li><a href="#" class="hover:text-green-300 hover:underline">Instagram</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-8 border-t border-gray-600 pt-4 text-center text-sm">
+                <p class="block">&copy; 2024 McCancy Food Mart. All Rights Reserved</p>
+            </div>    
+        </div>
+    </footer>
+    <script>
+        //Toggle Mobile Menu Visibility
+        document.getElementById('menu-btn').addEventListener('click', function(){
+            var menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+    </script>
+    
+</body>
+</html>

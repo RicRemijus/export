@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="py-20 bg-gray-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <div class=""> 
+            <!--Display the first image-->
+            <h2 class="text-2xl font-bold text-gray-800 py-4">{{product.name}}</h2>
+            <div class=" w-full h-[300px] mb-4">
+                <img src="{{product.images.first.image.url}}"  alt="{{product.images.first.alt_text}}" class="w-full h-full object-cover rounded-lg shadow-lg"/>
+            </div>
+            <!--Display carousel if morethan one image-->
+            {% if product.images.count > 1 %}
+            <div class="relative">
+                <div class="carousel-container overflow-hidden relative">
+                    <div class="carousel-inner flex transition-transform duration-500">
+                    {% for image in product.images.all %}
+                    <div class="carousel-item flex-shrink-0 flex justify-center w-full h-[350px]">
+                        <img src="{{image.image.url}}" class="w-full object-cover rounded-lg shadow-lg" alt="...">
+                    </div>
+                    {% endfor %}
+                    </div>
+                </div>
+                <!--Carousel Indicators-->
+                <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+                    {% for image in product.images.all %}
+                    <button class="indicator w-3 h-3 rounded-full bg-gray-50 focus:outline-none" data-index="{{forloop.counter0}}"></button>
+                    {% endfor %}
+                </div>
+                <!--Carousel control-->
+                    <button class="absolute top-1/2 left-0 transform -translate-y-1/2 p-4 text-white bg-gray-800 bg-opacity-50 hover:bg-opacity-75 rounded-full" id="prevBtn">&#10094;</button>
+                    <button class="absolute top-1/2 right-0 transform -translate-y-1/2 p-4 text-white bg-gray-800 bg-opacity-50 hover:bg-opacity-75 rounded-full" id="nextBtn">&#10095;</button>
+            </div>
+            {% endif %}
+        </div>
+        <aside class="border px-4 rounded shadow-lg">
+            <div class="mt-5">
+            <h2 class="text-xl font-bold text-gray-800">{{product.name}}</h2>
+            <p class="mt-4 text-lg text-gray-600">{{product.description}}</p>
+            </div>
+            <h2 class="font-semibold text-2xl text-gray-900 mt-4 mb-2">Key Highlights: </h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-7">
+
+            <div class="mt-2">
+                <h2 class="font-semibold text-gray-800 mb-2">Packaging</h2>
+                <p class=" text-gray-700">We package our products using:</p>
+                <ul class="list-disc ml-6 mt-2 mb-4 text-gray-600">
+                    <li>Ventilated cartons or nesh bags</li>
+                    <li>25kg and 50kg food-grade buckets or cartons </li>
+                    <li>20L jerry cans, 200L drums, or bulk tanks</li>
+                    <li>Vacuum-sealed 25kg cartons or jute bags with liners</li>
+                    <li>25kg or 50kg woven bags or inner liners</li>
+                    <li>10kg and 20kg food-grade polypropylene bags</li>
+                </ul>
+            </div>
+            <div class="mt-2">  
+                <h3 class="font-semibold text-gray-800 mt-1">Certifications </h3>
+                <ul class="list-disc ml-6 mt-2 mb-4 text-gray-600">
+                  <li>USDA Organic Certified</li>
+                  <li>EU Organic Certified</li>
+                  <li>Fair Trade Certified</li>
+                  <li>100% Natural, No preservatives</li>
+                  <li>Available in bulk packaging (10kg, 25kg)</li>
+                </ul>   
+            </div>
+        </div>
+            <div class="mt-3">
+                <h3 class="font-semibold text-gray-800">Quality Assurance </h3>
+                <p class="text-gray-600 mt-2">Our Quality assurance processes include third-party Lab testing and factory certifications to ensure purity and compliance with EU and North America export standards.</p>
+            </div>
+            <div class="mt-3 mb-2">
+                <p class="font-semibold text-gray-700">Traceability:</p>
+                <p class="text-gray-600">Sourced from Nigeria</p>
+            </div>
+        </aside>
+    </div>
+    </div>
+    </div>    
+</section>
+
+{% endblock %}

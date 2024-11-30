@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+
+{%  load static %}
+    {% block content %}
+    <section class="relative h-screen pt-10 pb-24 px-4 sm:px-6 lg:px-8" >
+        <div class="absolute inset-0">
+            <img src={% static 'images/hero.jpg' %} class="w-full h-full object-cover"/>
+        </div>
+            <div class="absolute inset-0 bg-black opacity-50"></div>
+        <div class="relative z-10 flex justify-center items-center h-full  text-white text-center px-4">
+            <div class="max-w-3xl">
+                <h1 class="text-4xl md:text-5xl font-extrabold  leading-tight">McCancy Food Mart</h1>
+                <h2 class="text-2xl font-bold mb-6">Bringing Fresh & Quality Foods to Your Doorstep</h2>
+                <p class="mb-6 text-lg">Discover a diverse range of premium food products sourced from Nigeria. Our commitment to quality and sustainability ensures that you're getting the finest ingredients, wherever you are.</p>
+                <a href="#products" class="bg-yellow-500 hover:bg-green-500 text-white font-semibold px-6 py-3 rounded-full transition duration-300 ease-in-out">Explore Our Products</a>
+            </div>
+        </div>
+    </section>
+    
+
+    <!--About Section-->
+    <section class="py-16" id="about">
+        <div class="max-w-7xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-semibold text-gray-800">Our Global Impact</h2>
+            <p class="mt-4 text-lg text-gray-600">
+                We deliver food products to the US, Canada, UK and EU, helping businesses and households get access to fresh, sustainable, and high-quality food from trusted sources.
+            </p>
+        </div>
+    </section>
+    <!--Service Section-->
+    <section class="py-16 bg-gray-50" id="services">
+        <div class="max-w-7xl mx-auto text-center px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-semibold text-gray-800">Our Global Services</h2>
+            <p class="mt-4 text-lg text-gray-600">
+                We provide world-class food export services that guarantee the freshest, highest-quality products delivered right to your door.
+            </p>
+            <!--Service card grid-->
+            <div class="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-lg shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-xl">
+                    <div class="mb-4">
+                        <img src="{% static "images/world.svg" %}" class="w-full h-40" />
+                    </div>
+                    <h3 class="text-2xl font-semibold text-blue-500">Globl Sourcing 🌍</h3>
+                    <p class="mt-4 text-gray-600">We source fresh food products from the best growers and suppliers across Nigeria, ensuring that our products meet the highest standards of quality.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-xl">
+                    <div class="mb-4">
+                        <img src="{% static "images/logistics1.svg" %}" class="w-full h-40" />
+                    </div>
+                    <h3 class="text-2xl font-semibold">Reliable Logistics &#128666;</h3>
+                    <p class="mt-4 text-gray-600">Our robust logistics network ensures timely delivery of fresh products, maintaining the integrity and quality of every shipment.</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-lg transform transition duration-300 hover:scale-105 hover:shadow-xl">
+                    <div class="mb-4">
+                        <img src="{% static "images/sustainable1.svg" %}" class="w-full h-40" />
+                    </div>
+                    <h3 class="text-2xl font-semibold text-green-700">Sustainable Practices 🛡️</h3>
+                    <p class="mt-4 text-gray-600">We prioritize sustainability in every step of our supply chain, from eco-friendly packaging to ethical sourcing practices.</p>
+                </div>
+
+
+        </div>
+    </section>
+
+     <!--Product Section-->
+     <section class="py-16 bg-gray-200" id="products">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">  
+            <h2 class="text-3xl font-bold md:text-4xl text-green-800">Our Food Products</h2>
+            <p class="mt-4 text-lg text-gray-900">
+                Explore our selection of premium food products ready for export. Contact us for custom pricing based on your requirements.
+            </p>
+            </div>
+            <!--Responsive Grids for products-->
+            <div class="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                {% for product in products %}
+                <div class="relative bg-white shadow-lg rounded-lg overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-xl">
+                <!--New Stock Banner-->
+                {% if product.is_new_stock %}
+                <div class="absolute top-0 right-0 transform rotate-[35deg] origin-top-right bg-green-500 text-white py-2 px-10 mt-12 -mr-6">
+                    <span class="text-xs font-extrabold">New Stock</span>
+                </div>
+                {% endif %}
+                <!--Product image-->
+                <div class="w-full h-72 overflow-hidden">
+                    {% if product.images.count > 0 %}
+                  <img src={{product.images.first.image.url}} alt={{product.name}} class="w-full h-full object-cover">
+                  {% endif %}
+                </div>
+                <!--Product Details-->
+                <div class="py-2 px-4">
+                    <h2 class="text-xl font-semibold text-indigo-800">{{product.name}}</h2>
+                    <p class="mt-4 text-gray-600">{{product.description|truncatechars:"100"}}</p>
+                    <div class="mt-4">
+                        <a href="{% url 'product_details' slug=product.slug %}" class="block w-full text-center py-3 px-6 text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition">Read more</a>
+                    </div>
+                </div>
+                
+            </div>
+            {% endfor %}
+        </div>
+        </div>
+    </section>
+    <section class="bg-gray-800 text-white py-16" id="newsletter">
+        <div class="container mx-auto text-center">
+            <h2 class="text-2xl font-semibold">Subscribe to Our Newsletter </h2>
+            <p class="mt-2">Get the latest updates on fresh products, offers, and more!</p>
+            <form class="mt-4">
+                
+                <input type="email" class="p-2  text-black rounded-lg" placeholder="Enter your email" required />
+                <button type="submit" class="bg-black px-6 py-2 rounded-lg">Subscribe</button>
+            </form>
+            <small class="text-gray-500 mt-2">we respect your privacy, you can unsubscribe anytime</small>
+    </section>
+    {% endblock %}
